@@ -1,0 +1,357 @@
+.PostContainer{
+    max-width: 25% ;
+    min-width: 25%;
+    padding: 3rem;
+    border-radius: 1rem;
+    /*color: #282c34;*/
+
+    /*border-style: solid;*/
+    border-width: 1px;
+    word-break: break-word;
+    box-shadow: #443737b3 -4px 3px 20px 0px;
+
+    background: rgb(255 255 255 / 40%);
+}
+.PostHeader{
+    font-size: 1rem;
+}
+.PostBody{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    font-size: 0.8rem;
+}
+.PostBodyFull{
+    font-size: 0.8rem;
+}
+
+.Alerts{
+    position: absolute;
+    bottom: 100px;
+    left: 100px;
+}
+
+.LikesCount {
+    /*    style likes */
+}
+
+.LikeButton{
+    font-family: sans-serif;
+    font-size: 1.5rem;
+
+    border-style: none;
+    border-radius: 10%;
+    /*background: rgba(0, 128, 0, 0.3);*/
+    background: none;
+
+    /*padding: 1rem;*/
+    /*margin: 0.5rem;*/
+}
+.DeleteButton{
+    font-family: sans-serif;
+    font-size: 1.5rem;
+
+    border-style: none;
+    border-radius: 10%;
+    /*background: rgba(128, 0, 0, 0.3);*/
+    background: none;
+
+    padding: 1rem;
+    margin: 0.5rem;
+}
+
+.BurgerContainer {
+    padding: 1rem;
+    margin-bottom: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+
+    background-color: black;
+    color: white;
+}
+.BurgerContainer h1 {
+    margin: 8px 0;
+}
+.BurgerContainer button {
+    background: none;
+    font-family: sans-serif;
+    border-style: none;
+    color: white;
+    font-size: 2rem;
+}
+.BurgerContainer ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    list-style-type: none;
+    padding: 0;
+}
+.BurgerContainer li button {
+    padding: 0;
+    font-size: 1rem;
+}
+
+.BurgerContainer a {
+    text-decoration: none;
+    color: white;
+}
+
+.Navbar{
+    padding: 1rem;
+    margin-bottom: 2rem;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+
+    background-color: black;
+    color: white;
+}
+.LogOutButton{
+    z-index: 100;
+    position: absolute;
+
+    font-family: sans-serif;
+    font-size: 1rem;
+
+    border-style: none;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+
+    padding: 1rem;
+
+    color: white;
+}
+
+/*.NavDropdown:hover~.LogOutButton {*/
+/*    display: block;*/
+/*    position: absolute;*/
+/*    z-index: 1;*/
+/*    right: 5rem;*/
+/*    top: 5rem*/
+/*}*/
+
+.Navbar a{
+    text-decoration: none;
+    color: white;
+}
+
+.FormWrapper {
+    padding: 1.5rem;
+    margin: 1rem;
+}
+
+.FormWrapper label {
+    color: white;
+}
+
+.FormWrapper form{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.FormWrapper input {
+    font-size: 1.2rem;
+    padding: 8px;
+    border-radius: 8px;
+    border-style: none;
+    background-color: rgba(228, 231, 239, 0.66);
+}
+.FormWrapper textarea {
+    font-size: 1.2rem;
+    padding: 8px;
+    border-radius: 8px;
+    border-style: none;
+    background-color: rgba(228, 231, 239, 0.66);
+    min-height: 10rem;
+    font-family: sans-serif;
+}
+
+.FormWrapper input[type=submit] {
+    background-color: #000000;
+    color: white;
+}
+
+.FormWrapper input[name=body] {
+    min-height: 10rem;
+}
+
+
+
+.PostPageMain {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.PostDetails{
+    display: flex;
+    /*border-style: solid;*/
+    border-width: 1px;
+    border-radius: 10px;
+    padding: 2rem 4rem;
+
+    box-shadow: #443737b3 -4px 3px 20px 0px;
+    margin-bottom: 2rem;
+    overflow: clip;
+    position: relative;
+
+    background: rgb(255 255 255 / 40%);
+}
+
+/*.PostDetails:before {*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    bottom: 0;*/
+/*    left: 0;*/
+/*    right: 0;*/
+/*    z-index: -1;*/
+
+/*    display: block;*/
+/*    background-image: url("https://n.pr/3TNIrne");*/
+/*    background-size: cover;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+
+/*    filter: blur(5px);*/
+
+/*}*/
+
+.CommentComponent{
+    /*background-color: rgba(0, 0, 0, 0.08); 1.0*/
+    padding: 1rem;
+    border-radius: 10px;
+    /*background: rgb(255 255 255 / 40%);  2.0*/
+
+    background-color: rgb(0 0 0 / 50%);
+    color: white;
+}
+
+.CommentComponent p {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.CommentComponent pre {
+    white-space:  pre-wrap;
+    word-break: break-all;
+}
+
+.CommentsWrapper{
+
+}
+.CommentSectionHeader {
+    font-size: 20px;
+    margin: 1rem 0;
+
+    color: white;
+}
+.CommentSectionHeader::after{
+
+}
+
+.Comments{
+    border-width: 1px;
+    border-radius: 2rem;
+}
+.Comments div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+}
+.Comments form{
+    gap: 1rem;
+    display: flex;
+    flex-direction: row;
+    margin: 1rem 0 2rem 0;
+}
+.Comments textarea{
+    width: 90%;
+    border-style: none;
+    border-radius: 10px;
+    /*background-color: rgba(0, 0, 0, 0.08);*/
+    padding: 1rem;
+
+    background-color: rgb(0 0 0 / 50%);
+    color: white;
+}
+.Comments input[type=submit]{
+    border-style: none;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    width: 10%;
+    font-size: 1rem;
+}
+
+.Error{
+    text-align: center;
+}
+.LikeFullPost{
+    background: none;
+    border-style: none;
+    margin-top: 1rem;
+}
+.DeleteComment{
+    background: none;
+    border-style: none;
+    align-self: flex-start;
+    margin-left: 2rem;
+}
+
+@media only screen and (max-width: 768px) {
+    .PostContainer {
+        max-width: 60%;
+        min-width: 60%;
+    }
+    .FormWrapper {
+        margin: 0;
+    }
+    .Comments textarea{
+        width: 80%;
+    }
+    .Comments input[type=submit]{
+        width: 20%;
+    }
+}
+
+@media only screen and (max-width: 1200px) and (min-width: 768px){
+    .Comments textarea{
+        width: 85%;
+    }
+    .Comments input[type=submit]{
+        width: 15%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .PostDetails {
+        padding: 1rem 1rem 2rem 1rem;
+    }
+    .Comments textarea {
+        width: 70%;
+    }
+    .Comments input[type=submit] {
+        width: 30%;
+    }
+}
+
+
+.Banana{
+    width: 50%;
+}
+
+.ButtonGroup {
+    display: flex;
+    justify-content: space-between;
+}

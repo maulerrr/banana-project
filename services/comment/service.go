@@ -45,6 +45,7 @@ func (s *Service) GetAllComments(c *gin.Context, req *pb.GetAllCommentRequest) (
 			CommentId: int32(comment.CommentID),
 			PostId:    int32(comment.PostID),
 			UserId:    int32(comment.UserID),
+			Username:  comment.Username,
 			Text:      comment.Text,
 		}
 	}

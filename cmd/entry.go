@@ -2,6 +2,8 @@ package main
 
 import (
 	"github.com/gin-contrib/cors"
+	"github.com/maulerrr/banana/pkg/rabbitmq"
+	"github.com/maulerrr/banana/services/like"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -15,6 +17,12 @@ import (
 
 func main() {
 	dbHandler := db.InitDB(config.DBUrl)
+	producer, err := rabbitmq.NewProducer(config.AMPQUrl, "likes")
+	consumer, err := rabbitmq.NewConsumer(config.AMPQUrl, "likes")
+	if err != nil {
+		log.Fatal("rabbit error:", err)
+		return
+	}
 
 	app := gin.Default()
 	app.Use(cors.New(cors.Config{
@@ -46,6 +54,10 @@ func main() {
 	}
 	commentHandlers := comment.NewHandler(commentService)
 	routes.RegisterCommentRoutes(app, commentHandlers)
+
+	likeService := like.NewLikeService(&dbHandler, producer)
+	likeHandler := like.NewLikeHandler(likeService, consumer)
+	routes.RegisterLikeRoutes(app, likeHandler)
 
 	err = app.Run(config.Port)
 	if err != nil {

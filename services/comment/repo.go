@@ -6,9 +6,20 @@ import (
 	"gorm.io/gorm"
 )
 
-func GetAllCommentsByPostID(postID int, handler *db.DBHandler) ([]*models.Comment, error) {
-	var comments []*models.Comment
-	err := handler.DB.Where("post_id = ?", postID).Find(&comments).Error
+type ResponseToGetAllComments struct {
+	CommentID int    `json:"comment_id"`
+	UserID    int    `json:"user_id"`
+	PostID    int    `json:"post_id"`
+	Username  string `json:"username"`
+	Text      string `json:"text"`
+}
+
+func GetAllCommentsByPostID(postID int, handler *db.DBHandler) ([]*ResponseToGetAllComments, error) {
+	var comments []*ResponseToGetAllComments
+	err := handler.DB.Raw(`SELECT 
+    comments.comment_id, comments.user_id, comments.post_id, users.username, comments.text
+	FROM comments INNER JOIN users ON comments.user_id = users.user_id
+	WHERE comments.post_id=?`, postID).Scan(&comments).Error
 	if err != nil {
 		return nil, err
 	}

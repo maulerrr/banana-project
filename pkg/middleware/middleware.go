@@ -7,6 +7,7 @@ import (
 	"github.com/maulerrr/banana/pkg/utils"
 	"github.com/maulerrr/banana/services/comment"
 	"github.com/maulerrr/banana/services/post"
+	"log"
 	"strconv"
 
 	"strings"
@@ -34,6 +35,7 @@ func AuthMiddleware() gin.HandlerFunc {
 		if err != nil {
 			utils.SendMessageWithStatus(context, err.Error(), 401)
 			context.Abort()
+			log.Println("error while parsing token")
 			return
 		}
 
@@ -66,7 +68,7 @@ func PostDeletionMiddleware() gin.HandlerFunc {
 			return
 		}
 
-		postID, err := strconv.Atoi(context.Param("post_id"))
+		postID, err := strconv.Atoi(context.Param("id"))
 		if err != nil {
 			utils.SendMessageWithStatus(context, err.Error(), 401)
 			context.Abort()

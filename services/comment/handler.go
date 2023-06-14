@@ -19,7 +19,7 @@ func NewHandler(service *Service) *Handler {
 }
 
 func (h *Handler) GetAllCommentsHandler(c *gin.Context) {
-	postIDStr := c.Param("post_id")
+	postIDStr := c.Param("id")
 	postID, err := strconv.Atoi(postIDStr)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid post ID"})

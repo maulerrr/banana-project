@@ -45,7 +45,7 @@ func (h *Handler) GetAllPostsHandler(c *gin.Context) {
 }
 
 func (h *Handler) GetPostHandler(c *gin.Context) {
-	postIDStr := c.Param("post_id")
+	postIDStr := c.Param("id")
 	postID, err := strconv.Atoi(postIDStr)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid post ID"})
@@ -66,7 +66,7 @@ func (h *Handler) GetPostHandler(c *gin.Context) {
 }
 
 func (h *Handler) DeletePostHandler(c *gin.Context) {
-	postIDStr := c.Param("post_id")
+	postIDStr := c.Param("id")
 	postID, err := strconv.Atoi(postIDStr)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid post ID"})
