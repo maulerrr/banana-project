@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package comment;
+
+option go_package = "./pb";
+
+message Comment {
+  int32 comment_id = 1;
+  int32 post_id = 2;
+  int32 user_id = 3;
+  string text = 4;
+}
+
+message GetAllCommentRequest {
+  int32 post_id = 1;
+}
+
+message DeleteCommentRequest {
+  int32 comment_id = 1;
+}
+
+message CreateCommentRequest {
+  int32 post_id = 1;
+  int32 user_id = 2;
+  string text = 3;
+}
+
+message GetAllCommentResponse {
+  repeated Comment comments = 1;
+}
+
+message Empty {}
+
+service CommentService {
+  rpc GetAllComment(GetAllCommentRequest) returns (GetAllCommentResponse);
+  rpc DeleteComment(DeleteCommentRequest) returns (Empty);
+  rpc CreateComment(CreateCommentRequest) returns (Comment);
+}
