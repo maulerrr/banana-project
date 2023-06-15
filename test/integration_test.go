@@ -231,7 +231,7 @@ func TestDeletePostHandler(t *testing.T) {
 	helper.ResetDB()
 }
 
-/ test comment handler
+// test comment handler
 func TestGetAllCommentsHandler(t *testing.T) {
 	handler := helper.InitCommentMock()
 
