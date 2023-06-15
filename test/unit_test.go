@@ -5,11 +5,12 @@ import (
 	"time"
 
 	"github.com/maulerrr/banana/pkg/models"
+	"github.com/maulerrr/banana/pkg/utils"
 )
 
 func TestHashPassword(t *testing.T) {
 	password := "password123"
-	hashedPassword := HashPassword([]byte(password))
+	hashedPassword := utils.HashPassword([]byte(password))
 
 	if hashedPassword == "" {
 		t.Error("HashPassword should return a non-empty string")
@@ -18,15 +19,15 @@ func TestHashPassword(t *testing.T) {
 
 func TestComparePasswords(t *testing.T) {
 	password := "password123"
-	hashedPassword := HashPassword([]byte(password))
+	hashedPassword := utils.HashPassword([]byte(password))
 
-	match := ComparePasswords(hashedPassword, password)
+	match := utils.ComparePasswords(hashedPassword, password)
 	if !match {
 		t.Error("ComparePasswords should return true for matching passwords")
 	}
 
 	wrongPassword := "wrongpassword"
-	match = ComparePasswords(hashedPassword, wrongPassword)
+	match = utils.ComparePasswords(hashedPassword, wrongPassword)
 	if match {
 		t.Error("ComparePasswords should return false for non-matching passwords")
 	}
@@ -41,12 +42,12 @@ func TestGenerateTokenAndParseToken(t *testing.T) {
 		CreatedAt: time.Now(),
 	}
 
-	token, err := GenerateToken(user, jwtKey)
+	token, err := utils.GenerateToken(user, jwtKey)
 	if err != nil {
 		t.Errorf("GenerateToken returned an error: %v", err)
 	}
 
-	claims, err := ParseToken(token, jwtKey)
+	claims, err := utils.ParseToken(token, jwtKey)
 	if err != nil {
 		t.Errorf("ParseToken returned an error: %v", err)
 	}
