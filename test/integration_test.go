@@ -12,6 +12,7 @@ import (
 	helper "github.com/maulerrr/banana/test/helper"
 
 	authpb "github.com/maulerrr/banana/services/auth/pb"
+	commentpb "github.com/maulerrr/banana/services/comment/pb"
 	postpb "github.com/maulerrr/banana/services/post/pb"
 )
 
@@ -163,9 +164,7 @@ func TestGetPostHandler(t *testing.T) {
 			Name:         "Invalid Request",
 			Params:       gin.Params{gin.Param{Key: "id", Value: "invalid"}},
 			ExpectedCode: http.StatusBadRequest,
-			ExpectedData: map[string]interface{}{
-				"error": "Invalid post ID",
-			},
+			ExpectedData: gin.H{"error": "Invalid post ID"},
 		},
 	}
 
@@ -197,9 +196,7 @@ func TestCreatePostHandler(t *testing.T) {
 		{
 			Name:         "Invalid request body/Empty",
 			ExpectedCode: http.StatusBadRequest,
-			ExpectedData: map[string]interface{}{
-				"error": "Invalid request body",
-			},
+			ExpectedData: gin.H{"error": "Invalid request body"},
 		},
 	}
 
@@ -217,13 +214,13 @@ func TestDeletePostHandler(t *testing.T) {
 			Name:         "Valid Request",
 			Params:       gin.Params{gin.Param{Key: "id", Value: "1"}},
 			ExpectedCode: http.StatusOK,
-			ExpectedData: map[string]interface{}{},
+			ExpectedData: gin.H{},
 		},
 		{
 			Name:         "Invalid Request",
 			Params:       gin.Params{gin.Param{Key: "id", Value: "invalid"}},
 			ExpectedCode: http.StatusBadRequest,
-			ExpectedData: map[string]interface{}{"error": "Invalid post ID"},
+			ExpectedData: gin.H{"error": "Invalid post ID"},
 		},
 	}
 

@@ -47,16 +47,6 @@ func TestRun(testcases []Testcase, function func(context *gin.Context), method s
 				t.Errorf("Error unmarshalling response body: %v", err)
 			}
 
-			if reflect.ValueOf(response).Kind() == reflect.Map {
-				dataMap := response
-				var dataStruct interface{}
-
-				jsonData, _ := json.Marshal(dataMap)
-				json.Unmarshal(jsonData, &dataStruct)
-
-				response = dataStruct
-			}
-
 			expectedJSON, _ := json.Marshal(tc.ExpectedData)
 			actualJSON, _ := json.Marshal(response)
 
