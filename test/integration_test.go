@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/maulerrr/banana/pkg/models"
 	"github.com/maulerrr/banana/pkg/utils"
+	"github.com/maulerrr/banana/services/comment"
 	"net/http"
 	"testing"
 	"time"
@@ -227,5 +228,94 @@ func TestDeletePostHandler(t *testing.T) {
 	}
 
 	helper.TestRun(testcases, handler.DeletePostHandler, http.MethodDelete, false, t)
+	helper.ResetDB()
+}
+
+// test comment handler
+func TestGetAllCommentsHandler(t *testing.T) {
+	handler := helper.InitCommentMock()
+
+	helper.InitTestInstances(handler.Service.Handler, true, true, true)
+
+	testcases := []helper.Testcase{
+		{
+			Name:         "Valid post ID",
+			Params:       gin.Params{gin.Param{Key: "id", Value: "1"}},
+			ExpectedCode: http.StatusOK,
+			ExpectedData: []comment.ResponseToGetAllComments{
+				{
+					CommentID: 1,
+					UserID:    1,
+					PostID:    1,
+					Username:  "testuser",
+					Text:      "Test comment",
+				},
+			},
+		},
+		{
+			Name:         "Invalid post ID",
+			Params:       gin.Params{gin.Param{Key: "id", Value: "invalid"}},
+			ExpectedCode: http.StatusBadRequest,
+			ExpectedData: gin.H{"error": "Invalid post ID"},
+		},
+	}
+
+	helper.TestRun(testcases, handler.GetAllCommentsHandler, http.MethodGet, false, t)
+	helper.ResetDB()
+}
+
+func TestCreateCommentHandler(t *testing.T) {
+	handler := helper.InitCommentMock()
+
+	helper.InitTestInstances(handler.Service.Handler, true, true, false)
+
+	testcases := []helper.Testcase{
+		{
+			Name: "Valid request",
+			Payload: commentpb.CreateCommentRequest{
+				PostId: 1,
+				UserId: 1,
+				Text:   "New comment",
+			},
+			ExpectedCode: http.StatusOK,
+			ExpectedData: gin.H{
+				"comment_id": 1,
+				"post_id":    1,
+				"user_id":    1,
+				"text":       "New comment",
+			},
+		},
+		{
+			Name:         "Invalid request",
+			ExpectedCode: http.StatusBadRequest,
+			ExpectedData: gin.H{"error": "Invalid request body"},
+		},
+	}
+
+	helper.TestRun(testcases, handler.CreateCommentHandler, http.MethodPost, true, t)
+	helper.ResetDB()
+}
+
+func TestDeleteCommentHandler(t *testing.T) {
+	handler := helper.InitCommentMock()
+
+	helper.InitTestInstances(handler.Service.Handler, true, true, true)
+
+	testcases := []helper.Testcase{
+		{
+			Name:         "Valid comment ID",
+			Params:       gin.Params{gin.Param{Key: "id", Value: "1"}},
+			ExpectedCode: http.StatusOK,
+			ExpectedData: gin.H{},
+		},
+		{
+			Name:         "Invalid comment ID",
+			Params:       gin.Params{gin.Param{Key: "id", Value: "invalid"}},
+			ExpectedCode: http.StatusBadRequest,
+			ExpectedData: gin.H{"error": "Invalid comment ID"},
+		},
+	}
+
+	helper.TestRun(testcases, handler.DeleteCommentHandler, http.MethodDelete, false, t)
 	helper.ResetDB()
 }
