@@ -1,6 +1,9 @@
 package main
 
 import (
+	"github.com/gin-contrib/cors"
+	"github.com/maulerrr/banana/pkg/rabbitmq"
+	"github.com/maulerrr/banana/services/like"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -14,7 +17,19 @@ import (
 
 func main() {
 	dbHandler := db.InitDB(config.DBUrl)
-	router := gin.Default()
+	producer, err := rabbitmq.NewProducer(config.AMPQUrl, "likes")
+	consumer, err := rabbitmq.NewConsumer(config.AMPQUrl, "likes")
+	if err != nil {
+		log.Fatal("rabbit error:", err)
+		return
+	}
+
+	app := gin.Default()
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{"GET", "POST", "PUT", "DELETE"},
+		AllowHeaders: []string{"Origin", "Content-Type", "Accept", "Authorization"},
+	}))
 
 	authService, err := auth.InitAuthService(config.AuthSvcUrl, dbHandler)
 	if err != nil {
@@ -22,7 +37,7 @@ func main() {
 		return
 	}
 	authHandlers := auth.NewHandler(authService)
-	routes.RegisterAuthRoutes(router, authHandlers)
+	routes.RegisterAuthRoutes(app, authHandlers)
 
 	postService, err := post.InitPostService(config.PostSvcUrl, dbHandler)
 	if err != nil {
@@ -30,7 +45,7 @@ func main() {
 		return
 	}
 	postHandlers := post.NewHandler(postService)
-	routes.RegisterPostRoutes(router, postHandlers)
+	routes.RegisterPostRoutes(app, postHandlers)
 
 	commentService, err := comment.InitCommentService(config.CommentSvcUrl, dbHandler)
 	if err != nil {
@@ -38,9 +53,13 @@ func main() {
 		return
 	}
 	commentHandlers := comment.NewHandler(commentService)
-	routes.RegisterCommentRoutes(router, commentHandlers)
+	routes.RegisterCommentRoutes(app, commentHandlers)
 
-	err = router.Run(config.Port)
+	likeService := like.NewLikeService(&dbHandler, producer)
+	likeHandler := like.NewLikeHandler(likeService, consumer)
+	routes.RegisterLikeRoutes(app, likeHandler)
+
+	err = app.Run(config.Port)
 	if err != nil {
 		log.Fatal("error running server: ", err)
 	}

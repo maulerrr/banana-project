@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package post;
+
+option go_package = "./pb";
+
+message Post {
+  int32 post_id = 1;
+  string header = 2;
+  string body = 3;
+  int32 user_id = 4;
+}
+
+message GetAllPostRequest {}
+
+message GetPostRequest {
+  int32 post_id = 1;
+}
+
+message CreatePostRequest {
+  int32 user_id = 1;
+  string header = 2;
+  string body = 3;
+}
+
+message DeletePostRequest {
+  int32 post_id = 1;
+}
+
+message GetAllPostResponse {
+  repeated Post posts = 1;
+}
+
+message Empty {}
+
+service PostService {
+  rpc GetAllPost(GetAllPostRequest) returns (GetAllPostResponse);
+  rpc GetPost(GetPostRequest) returns (Post);
+  rpc CreatePost(CreatePostRequest) returns (Post);
+  rpc DeletePost(DeletePostRequest) returns (Empty);
+}

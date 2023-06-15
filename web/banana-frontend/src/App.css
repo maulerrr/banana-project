@@ -1,0 +1,103 @@
+.App {
+  min-height: 60vh;
+  margin: 0 3rem;
+
+  text-align: center;
+}
+.Home{
+  min-height: 60vh;
+  margin: 0 3rem;
+
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: space-around;
+}
+.Login {
+  min-height: 60vh;
+  margin: 0 3rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-around;
+}
+.SignUp{
+  min-height: 60vh;
+  margin: 0 3rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-around;
+}
+
+.CreatePostPage {
+  min-height: 60vh;
+  margin: 0 3rem;
+
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
+}
+
+.PostPage {
+  padding: 0 10rem;
+}
+input{
+  outline: none;
+}
+
+body {
+  min-height: 100vh;
+  /*background-image: url("https://t4.ftcdn.net/jpg/02/82/54/51/360_F_282545153_aI4JQT9Tj01VM3ypwCp1D1y3154IVbSw.jpg");*/
+  /*background-image: url("https://i2-prod.mirror.co.uk/incoming/article28481656.ece/ALTERNATES/s1200d/0_Monkey-and-its-furry-friend-live-in-Bangladeshjp.jpg");*/
+  /*background-image: url("https://wallpapers.com/images/featured/i5ig3btki8vtrp2g.jpg");*/
+  /*background: linear-gradient(317deg, white, #b09ffb);*/
+  /*background-image: url("https://images.newscientist.com/wp-content/uploads/2019/01/31134057/gettyimages-86304874.jpg?crop=4:3,smart&width=1200&height=900&upscale=true");*/
+  /*background-image: url("https://manilatoday.net/wp-content/uploads/2017/05/banana.jpeg");*/
+  background-image: url("https://cdn.shopify.com/s/files/1/0565/7080/6458/products/banana-wallpaper-mural.jpg?v=1655708901");
+  background-size: cover;
+  backdrop-filter: blur(5px);
+}
+
+.Indicator{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+
+textarea {
+  resize: none;
+}
+
+/*
+   ADAPTIVE LAYOUT
+*/
+
+@media only screen and (max-width: 768px) {
+  .Home{
+    margin: 0 1rem;
+  }
+  .Login {
+
+  }
+  .SignUp {
+
+  }
+
+  .CreatePostPage {
+    margin: 0 1rem;
+  }
+
+  .PostPage {
+    padding: 0 1rem;
+  }
+}
+
+@media only screen and (max-width: 1200px) and (min-width: 768px){
+  .PostPage {
+    padding: 0 5rem;
+  }
+}

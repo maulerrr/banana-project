@@ -16,20 +16,24 @@ type DBHandler struct {
 
 func InitDB(url string) DBHandler {
 	db, err := gorm.Open(postgres.Open(url), &gorm.Config{})
-
 	if err != nil {
 		log.Fatalf("error occured while opening db conn: %s", err)
 	}
 
-	db.AutoMigrate(
+	log.Println("database connected: ", url)
+
+	err = db.AutoMigrate(
 		&models.User{},
 		&models.Post{},
 		&models.Comment{},
-		//Todo: add migration models
 	)
+	if err != nil {
+		log.Fatalf("error occurred while migration: %s", err)
+	}
+
+	log.Println("migrations done")
 
 	dbConn = db
-
 	return DBHandler{db}
 }
 

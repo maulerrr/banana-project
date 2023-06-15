@@ -5,6 +5,7 @@ import (
 	middlewares "github.com/maulerrr/banana/pkg/middleware"
 	"github.com/maulerrr/banana/services/auth"
 	"github.com/maulerrr/banana/services/comment"
+	"github.com/maulerrr/banana/services/like"
 	"github.com/maulerrr/banana/services/post"
 )
 
@@ -28,11 +29,21 @@ func RegisterPostRoutes(r *gin.Engine, handler *post.Handler) {
 }
 
 func RegisterCommentRoutes(r *gin.Engine, handler *comment.Handler) {
-	router := r.Group("comment")
+	router := r.Group("/comment")
 
 	router.Use(middlewares.AuthMiddleware())
 
-	router.GET("/", handler.GetAllCommentsHandler)
+	router.GET("/:id", handler.GetAllCommentsHandler)
 	router.POST("/", handler.CreateCommentHandler)
 	router.DELETE("/:id", middlewares.CommentDeletionMiddleware(), handler.DeleteCommentHandler)
+}
+
+func RegisterLikeRoutes(r *gin.Engine, handler *like.Handler) {
+	router := r.Group("/like")
+
+	router.Use(middlewares.AuthMiddleware())
+
+	router.GET("/:id", handler.GetLikeHandler)
+	router.GET("/count/:id", handler.GetLikesCountOnPostHandler)
+	router.POST("/", handler.LikeHandler)
 }
