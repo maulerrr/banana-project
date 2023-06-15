@@ -77,7 +77,7 @@ func (s *Service) SignUp(c *gin.Context, req *pb.RegisterRequest) (*pb.AuthRespo
 
 	found, err := GetUserByEmail(req.Email, s.Handler)
 	if err == nil && found != nil {
-		c.AbortWithError(http.StatusBadRequest, err)
+		c.AbortWithError(http.StatusBadRequest, errors.New("user already exists"))
 		return nil, errors.New("user already exists")
 	}
 
