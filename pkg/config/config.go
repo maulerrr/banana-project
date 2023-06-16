@@ -7,5 +7,5 @@ var (
 	PostSvcUrl    = ":50052"
 	CommentSvcUrl = ":50053"
 	JWTSecretKey  = "nothing ever goes as planned in this cursed world"
-	AMPQUrl       = "amqp://guest:guest@localhost:5672/"
+	AMPQUrl       = "amqp://guest:guest@0.0.0.0:5672/"
 )
