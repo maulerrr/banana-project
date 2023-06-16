@@ -44,13 +44,14 @@ function PostCard(props) {
                 })
             console.log("Deleted post with id=" + props.post.post_id)
         }).catch((error)=> {
+            console.log(error)
             setAlert(
                 <Alert severity={"error"}
                        variant={"filled"}
                        onClose={(e)=>{closeAlert(e)}}
                 >
                     <AlertTitle>Error occurred</AlertTitle>
-                    {error.response.data.message}
+                    {error.response.data.error}
                 </Alert>
             )
             setTimeout(()=>{

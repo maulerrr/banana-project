@@ -26,6 +26,7 @@ func InitDB(url string) DBHandler {
 		&models.User{},
 		&models.Post{},
 		&models.Comment{},
+		&models.Like{},
 	)
 	if err != nil {
 		log.Fatalf("error occurred while migration: %s", err)

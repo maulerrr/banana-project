@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: banana-aitu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: banana-aitu
+  template:
+    metadata:
+      labels:
+        app: banana-aitu
+    spec:
+      containers:
+        - name: banana-aitu
+          image: banana-aitu:latest
+          ports:
+            - containerPort: 3000

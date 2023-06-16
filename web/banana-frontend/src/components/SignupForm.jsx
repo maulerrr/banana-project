@@ -33,7 +33,7 @@ function SignupForm(props) {
         handleRegistration(username, email, password)
             .then((response)=>{
                 console.log("Trying to u sign up..")
-                if (response.code === 200) window.location.href = "/"
+                if (response) window.location.href = "/"
             })
             .catch((err)=>{
                 console.log(err)
@@ -44,7 +44,7 @@ function SignupForm(props) {
                            onClose={(e)=>{closeAlert(e)}}
                     >
                         <AlertTitle>Error occurred</AlertTitle>
-                        {err.response.data.message}
+                        {err.response.data.error}
                     </Alert>
                 )
                 setTimeout(()=>{

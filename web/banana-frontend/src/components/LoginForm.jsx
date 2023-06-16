@@ -31,7 +31,7 @@ function LoginForm(props) {
                            onClose={(e)=>{closeAlert(e)}}
                            >
                         <AlertTitle>Error occurred</AlertTitle>
-                        {err.response}
+                        {err.response.data.error}
                     </Alert>
                 )
                 setTimeout(()=>{
