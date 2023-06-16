@@ -3,9 +3,15 @@ version: '3'
 services:
   rabbitmq:
     image: rabbitmq:3-management
+    hostname: rabbitmq
     ports:
       - "5672:5672"
       - "15672:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "wait", "--timeout", "30", "rabbit@localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   app:
     build:
